@@ -1,0 +1,28 @@
+# Dependências
+node_modules/
+**/node_modules/
+
+# Banco de dados
+backend/gamekey.db
+backend/gamekey.db-shm
+backend/gamekey.db-wal
+
+# ROMs e arquivos dos jogos
+frontend/public/games/
+
+# Configurações privadas
+.env
+.env.*
+!.env.example
+
+# Arquivos gerados
+dist/
+build/
+coverage/
+
+# Logs
+*.log
+
+# Sistema
+.DS_Store
+Thumbs.db

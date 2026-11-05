@@ -1,0 +1,58 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GameKey - Emulador</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      background: #080b14;
+      overflow: hidden;
+    }
+
+    #game {
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="game"></div>
+
+  <script>
+    const parametros = new URLSearchParams(window.location.search);
+
+    const core = parametros.get('core');
+    const arquivo = parametros.get('game');
+    const nome = parametros.get('name') || 'GameKey';
+
+    if (!core || !arquivo) {
+      document.body.innerHTML = 'Configuração do jogo não encontrada.';
+      throw new Error('Emulador ou arquivo não informado.');
+    }
+
+    EJS_player = '#game';
+    EJS_core = core;
+    EJS_gameUrl = arquivo;
+    EJS_pathtodata = 'https://cdn.emulatorjs.org/stable/data/';
+    EJS_gameName = nome;
+    EJS_language = 'pt-BR';
+    EJS_startOnLoaded = true;
+  </script>
+
+  <script src="https://cdn.emulatorjs.org/stable/data/loader.js"></script>
+
+</body>
+</html>
