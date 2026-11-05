@@ -1,5 +1,14 @@
+
 import { useState, useEffect } from 'react'
 import './App.css'
+
+// ==========================================
+// CONFIGURAÇÃO DA API
+// ==========================================
+
+const API_URL = (
+  import.meta.env.VITE_API_URL || 'http://localhost:3000'
+).replace(/\/$/, '')
 
 // ==========================================
 // CATÁLOGO OFICIAL GAMEKEY - 29 JOGOS
@@ -222,8 +231,6 @@ const jogos = {
 // TELA DO JOGO
 // ==========================================
 
-
-
 function GameScreen({ jogo, codigo }) {
   const temJogoReal = Boolean(jogo.emulador && jogo.rom_url)
 
@@ -328,6 +335,10 @@ function NotFound() {
   )
 }
 
+// ==========================================
+// CARREGAMENTO
+// ==========================================
+
 function LoadingScreen() {
   return (
     <main className="game-page">
@@ -339,6 +350,10 @@ function LoadingScreen() {
     </main>
   )
 }
+
+// ==========================================
+// ERRO DE CONEXÃO
+// ==========================================
 
 function ApiError() {
   return (
@@ -486,8 +501,6 @@ function Home() {
           </div>
         </section>
 
-        {/* CATÁLOGO ORGANIZADO POR CONSOLE */}
-
         <section className="games-section" id="jogos">
           <div className="section-heading">
             <div>
@@ -625,7 +638,6 @@ function Home() {
 // APLICATIVO PRINCIPAL
 // ==========================================
 
-
 function App() {
   const caminho = window.location.pathname
   const rotaJogo = caminho.match(/^\/j\/([^/]+)\/?$/)
@@ -648,7 +660,7 @@ function App() {
     async function validarChaveiro() {
       try {
         const resposta = await fetch(
-          `http://localhost:3000/api/chaveiros/${encodeURIComponent(codigo)}`,
+          `${API_URL}/api/chaveiros/${encodeURIComponent(codigo)}`,
           { signal: controlador.signal }
         )
 
@@ -665,7 +677,6 @@ function App() {
 
         const codigoJogo = dados.jogo.codigo
 
-        // Recupera o símbolo visual do catálogo existente.
         const jogoCatalogo = jogos[codigoJogo]
 
         const jogoValidado = {
@@ -726,4 +737,3 @@ function App() {
 }
 
 export default App
-

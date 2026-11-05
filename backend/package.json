@@ -1,15 +1,24 @@
+
 {
-  "name": "backend",
+  "name": "gamekey-backend",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "API oficial do GameKey",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server.js",
+    "dev": "node server.js"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "gamekey",
+    "api",
+    "games"
+  ],
+  "author": "GameKey",
   "license": "ISC",
   "type": "commonjs",
+  "engines": {
+    "node": ">=22.12.0"
+  },
   "dependencies": {
     "@fastify/cors": "^11.4.1",
     "better-sqlite3": "^13.0.3",
