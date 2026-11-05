@@ -2,16 +2,33 @@
 const Fastify = require('fastify');
 const cors = require('@fastify/cors');
 const Database = require('better-sqlite3');
+const path = require('path');
 
 const app = Fastify({ logger: true });
 
+const PORT = Number(process.env.PORT) || 3000;
+
+// Permite acesso do frontend
 app.register(cors, { origin: true });
 
-const db = new Database('gamekey.db');
+// Caminho configurável para o banco persistente
+const dbPath = process.env.DATABASE_PATH ||
+  path.join(__dirname, 'gamekey.db');
+
+const db = new Database(dbPath);
 
 db.pragma('foreign_keys = ON');
+db.pragma('journal_mode = WAL');
 
-// Criação das tabelas
+// Fecha o banco quando o servidor for encerrado
+app.addHook('onClose', async () => {
+  db.close();
+});
+
+// ==========================================
+// CRIAÇÃO DAS TABELAS
+// ==========================================
+
 db.exec(`
   CREATE TABLE IF NOT EXISTS jogos (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -33,7 +50,10 @@ db.exec(`
   );
 `);
 
-// Atualiza o banco existente sem apagar os dados
+// ==========================================
+// ATUALIZAÇÃO DO BANCO EXISTENTE
+// ==========================================
+
 const colunas = db.prepare('PRAGMA table_info(jogos)').all();
 const nomes = colunas.map(c => c.name);
 
@@ -45,7 +65,10 @@ if (!nomes.includes('rom_url')) {
   db.exec('ALTER TABLE jogos ADD COLUMN rom_url TEXT');
 }
 
-// Catálogo dos 29 jogos
+// ==========================================
+// CATÁLOGO OFICIAL - 29 JOGOS
+// ==========================================
+
 const jogosIniciais = [
   ['GK-SNES-001', 'Super Mario World', 'Super Nintendo', 'Aventura', 'Explore o mundo de Mario.'],
   ['GK-SNES-002', "Yoshi's Island", 'Super Nintendo', 'Aventura', 'Acompanhe Yoshi em sua aventura.'],
@@ -81,6 +104,10 @@ const jogosIniciais = [
   ['GK-N64-004', 'Killer Instinct Gold', 'Nintendo 64', 'Luta', 'Participe de combates intensos.']
 ];
 
+// ==========================================
+// CADASTRO INICIAL SEM APAGAR DADOS
+// ==========================================
+
 const inserirJogo = db.prepare(`
   INSERT OR IGNORE INTO jogos
   (codigo, nome, plataforma, categoria, descricao)
@@ -88,7 +115,8 @@ const inserirJogo = db.prepare(`
 `);
 
 const inserirChaveiro = db.prepare(`
-  INSERT OR IGNORE INTO chaveiros (codigo, jogo_codigo)
+  INSERT OR IGNORE INTO chaveiros
+  (codigo, jogo_codigo)
   VALUES (?, ?)
 `);
 
@@ -99,7 +127,7 @@ db.transaction(() => {
   }
 })();
 
-// Configura emuladores por plataforma
+// Configura emuladores somente quando ainda não existem
 db.exec(`
   UPDATE jogos
   SET emulador = CASE
@@ -108,24 +136,32 @@ db.exec(`
     WHEN plataforma = 'PlayStation 1' THEN 'psx'
     WHEN plataforma = 'Nintendo 64' THEN 'n64'
     ELSE NULL
-  END;
+  END
+  WHERE emulador IS NULL OR emulador = '';
 `);
 
-// Configura o primeiro jogo já testado
+// Cadastra Mario somente se ainda não tiver ROM configurada
 db.prepare(`
   UPDATE jogos
   SET rom_url = ?
   WHERE codigo = ?
+    AND (rom_url IS NULL OR rom_url = '')
 `).run('/games/mario.smc', 'GK-SNES-001');
 
-// API inicial
+// ==========================================
+// ROTA PRINCIPAL
+// ==========================================
+
 app.get('/', async () => ({
   sistema: 'GameKey',
   status: 'online',
   mensagem: 'API e banco de dados funcionando.'
 }));
 
-// Lista jogos
+// ==========================================
+// LISTAR JOGOS
+// ==========================================
+
 app.get('/api/jogos', async () => {
   return db.prepare(`
     SELECT codigo, nome, plataforma, categoria, descricao,
@@ -136,7 +172,10 @@ app.get('/api/jogos', async () => {
   `).all();
 });
 
-// Busca jogo
+// ==========================================
+// BUSCAR JOGO
+// ==========================================
+
 app.get('/api/jogos/:codigo', async (request, reply) => {
   const codigo = request.params.codigo.toUpperCase();
 
@@ -148,13 +187,18 @@ app.get('/api/jogos/:codigo', async (request, reply) => {
   `).get(codigo);
 
   if (!jogo) {
-    return reply.code(404).send({ erro: 'Jogo não encontrado.' });
+    return reply.code(404).send({
+      erro: 'Jogo não encontrado.'
+    });
   }
 
   return jogo;
 });
 
-// Valida chaveiro
+// ==========================================
+// VALIDAR CHAVEIRO NFC
+// ==========================================
+
 app.get('/api/chaveiros/:codigo', async (request, reply) => {
   const codigo = request.params.codigo.toUpperCase();
 
@@ -171,7 +215,8 @@ app.get('/api/chaveiros/:codigo', async (request, reply) => {
       jogos.emulador,
       jogos.rom_url
     FROM chaveiros
-    INNER JOIN jogos ON jogos.codigo = chaveiros.jogo_codigo
+    INNER JOIN jogos
+      ON jogos.codigo = chaveiros.jogo_codigo
     WHERE chaveiros.codigo = ?
   `).get(codigo);
 
@@ -207,11 +252,20 @@ app.get('/api/chaveiros/:codigo', async (request, reply) => {
   };
 });
 
-// Inicia servidor
+// ==========================================
+// INICIAR SERVIDOR
+// ==========================================
+
 const iniciarServidor = async () => {
   try {
-    await app.listen({ port: 3000, host: '0.0.0.0' });
-    console.log('GameKey API disponível na porta 3000.');
+    await app.listen({
+      port: PORT,
+      host: '0.0.0.0'
+    });
+
+    console.log(`GameKey API disponível na porta ${PORT}.`);
+    console.log(`Banco de dados: ${dbPath}`);
+
   } catch (erro) {
     app.log.error(erro);
     process.exit(1);
