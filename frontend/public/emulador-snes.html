@@ -6,9 +6,7 @@
   <title>GameKey - Emulador</title>
 
   <style>
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     html, body {
       margin: 0;
@@ -73,6 +71,14 @@
     const nome = parametros.get('name') || 'GameKey';
 
     const modoLegado = parametros.get('legacy') === '1';
+    const testarThreads = parametros.get('threads') === '1';
+
+    const isolamentoAtivo = window.crossOriginIsolated === true;
+    const memoriaCompartilhada =
+      typeof SharedArrayBuffer !== 'undefined';
+
+    const threadsAtivas =
+      testarThreads && isolamentoAtivo && memoriaCompartilhada;
 
     if (!core || !arquivo) {
       document.body.innerHTML =
@@ -90,15 +96,31 @@
 
     EJS_startOnLoaded = true;
 
-    // Modo legado apenas quando solicitado explicitamente.
+    // Multithread somente no teste autorizado.
+    EJS_threads = threadsAtivas;
+
+    // WebGL 1 somente quando solicitado.
     EJS_forceLegacyCores = modoLegado;
 
     EJS_ready = function () {
       console.log('GameKey: EmulatorJS pronto.');
-      console.log('Modo legado:', modoLegado);
+      console.log('Isolamento:', isolamentoAtivo);
+      console.log('SharedArrayBuffer:', memoriaCompartilhada);
+      console.log('Threads ativadas:', threadsAtivas);
     };
 
-    // O aviso desaparece após 5 segundos.
+    // Diagnóstico temporário do teste multithread.
+    if (testarThreads) {
+      const aviso = document.getElementById('aviso-iniciar');
+
+      aviso.innerHTML =
+        '<strong>TESTE DE DESEMPENHO</strong><br>' +
+        'Isolamento: ' + (isolamentoAtivo ? 'SIM' : 'NÃO') +
+        ' | Memória: ' + (memoriaCompartilhada ? 'SIM' : 'NÃO') +
+        '<br>Multithread: ' + (threadsAtivas ? 'ATIVADO' : 'INDISPONÍVEL');
+    }
+
+    // Aviso desaparece depois de 5 segundos.
     window.setTimeout(function () {
       const aviso = document.getElementById('aviso-iniciar');
 
