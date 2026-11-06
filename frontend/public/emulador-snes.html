@@ -58,10 +58,11 @@
   <div id="game"></div>
 
   <div id="aviso-iniciar">
-    <strong>GAMEKEY:</strong>
-    Se o jogo não iniciar, toque em
-    <strong>RESET</strong> no menu do emulador.
-  </div>
+  <strong>GAMEKEY:</strong><br>
+  Toque em <strong>INICIAR JOGO</strong> para começar.<br>
+  Jogo lento ou áudio picotando?<br>
+  Experimente utilizar o <strong>Firefox</strong>.
+</div>
 
   <script>
     const parametros = new URLSearchParams(window.location.search);
@@ -94,7 +95,14 @@
     EJS_gameName = nome;
     EJS_language = 'pt-BR';
 
-    EJS_startOnLoaded = true;
+    const userAgent = navigator.userAgent || '';
+
+const androidChromium =
+  /Android/i.test(userAgent) &&
+  !/Firefox|Fennec/i.test(userAgent);
+
+EJS_startOnLoaded = !androidChromium;
+EJS_startButtonName = 'INICIAR JOGO';
 
     // Multithread somente no teste autorizado.
     EJS_threads = threadsAtivas;
@@ -109,16 +117,6 @@
       console.log('Threads ativadas:', threadsAtivas);
     };
 
-    // Diagnóstico temporário do teste multithread.
-    if (testarThreads) {
-      const aviso = document.getElementById('aviso-iniciar');
-
-      aviso.innerHTML =
-        '<strong>TESTE DE DESEMPENHO</strong><br>' +
-        'Isolamento: ' + (isolamentoAtivo ? 'SIM' : 'NÃO') +
-        ' | Memória: ' + (memoriaCompartilhada ? 'SIM' : 'NÃO') +
-        '<br>Multithread: ' + (threadsAtivas ? 'ATIVADO' : 'INDISPONÍVEL');
-    }
 
     // Aviso desaparece depois de 5 segundos.
     window.setTimeout(function () {
@@ -134,6 +132,32 @@
     }, 5000);
   </script>
 
+  <script>
+    // Teste: remover transparencia desnecessaria do canvas WebGL.
+    (function () {
+      const proto = HTMLCanvasElement.prototype;
+      const originalGetContext = proto.getContext;
+
+      proto.getContext = function (type, attributes) {
+        if (
+          type === 'webgl' ||
+          type === 'webgl2' ||
+          type === 'experimental-webgl'
+        ) {
+          attributes = Object.assign({}, attributes || {}, {
+            alpha: false,
+            premultipliedAlpha: false
+          });
+        }
+
+        return originalGetContext.call(this, type, attributes);
+      };
+    })();
+  </script>
   <script src="https://cdn.emulatorjs.org/stable/data/loader.js"></script>
 </body>
 </html>
+
+
+
+
