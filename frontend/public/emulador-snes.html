@@ -41,6 +41,7 @@
       font: 14px/1.5 Arial, sans-serif;
       text-align: center;
       pointer-events: none;
+      transition: opacity 0.3s ease;
     }
 
     #aviso-iniciar strong {
@@ -60,7 +61,7 @@
 
   <div id="aviso-iniciar">
     <strong>GAMEKEY:</strong>
-    Se a tela ficar preta, toque em
+    Se o jogo não iniciar, toque em
     <strong>RESET</strong> no menu do emulador.
   </div>
 
@@ -71,7 +72,6 @@
     const arquivo = parametros.get('game');
     const nome = parametros.get('name') || 'GameKey';
 
-    // Modo de compatibilidade opcional para testar no celular.
     const modoLegado = parametros.get('legacy') === '1';
 
     if (!core || !arquivo) {
@@ -88,16 +88,28 @@
     EJS_gameName = nome;
     EJS_language = 'pt-BR';
 
-    // Mantém a inicialização automática.
     EJS_startOnLoaded = true;
 
-    // Ativa WebGL 1 somente no teste com legacy=1.
+    // Modo legado apenas quando solicitado explicitamente.
     EJS_forceLegacyCores = modoLegado;
 
     EJS_ready = function () {
       console.log('GameKey: EmulatorJS pronto.');
-      console.log('Modo de compatibilidade:', modoLegado);
+      console.log('Modo legado:', modoLegado);
     };
+
+    // O aviso desaparece após 5 segundos.
+    window.setTimeout(function () {
+      const aviso = document.getElementById('aviso-iniciar');
+
+      if (aviso) {
+        aviso.style.opacity = '0';
+
+        window.setTimeout(function () {
+          aviso.style.display = 'none';
+        }, 300);
+      }
+    }, 5000);
   </script>
 
   <script src="https://cdn.emulatorjs.org/stable/data/loader.js"></script>
