@@ -323,58 +323,121 @@ function GameScreen({ jogo, codigo }) {
           </div>
         )}
 
-        <section className="game-contact-panel" aria-label="Contato DESH 3D LAB">
-          <div className="game-contact-intro">
-            <span className="game-contact-eyebrow">DESH 3D LAB</span>
-            <h2>Precisa de ajuda ou quer conhecer mais?</h2>
-            <p>Fale com nosso comercial e acompanhe as novidades.</p>
-          </div>
+       
+<section class="game-contact-panel" aria-label="Contato DESH 3D LAB">
 
-          <div className="game-contact-actions">
-            <a
-              className="game-contact-link game-contact-link--instagram"
-              href={INSTAGRAM_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Abrir Instagram DESH 3D LAB"
-            >
-              <span className="game-contact-icon" aria-hidden="true">â—Ž</span>
-              <span className="game-contact-link-copy">
-                <small>INSTAGRAM</small>
-                <strong>@desh_3dlab</strong>
-              </span>
-              <span className="game-contact-arrow" aria-hidden="true">â†—</span>
-            </a>
+  <div class="game-contact-intro">
+    <span class="game-contact-eyebrow">DESH 3D LAB</span>
+    <h2>Precisa de ajuda ou quer conhecer mais?</h2>
+    <p>Fale com nosso comercial e acompanhe as novidades.</p>
+  </div>
 
-            <a
-              className="game-contact-link game-contact-link--phone"
-              href={`tel:${TELEFONE}`}
-              aria-label="Ligar para o comercial DESH 3D LAB"
-            >
-              <span className="game-contact-icon" aria-hidden="true">â˜Ž</span>
-              <span className="game-contact-link-copy">
-                <small>COMERCIAL</small>
-                <strong>(11) 92728-4470</strong>
-              </span>
-              <span className="game-contact-arrow" aria-hidden="true">â†—</span>
-            </a>
+  <div class="game-contact-actions">
 
-            <a
-              className="game-contact-link game-contact-link--whatsapp"
-              href={WHATSAPP_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Conversar pelo WhatsApp com DESH 3D LAB"
-            >
-              <span className="game-contact-icon" aria-hidden="true">â—‰</span>
-              <span className="game-contact-link-copy">
-                <small>FALE COM A GENTE</small>
-                <strong>WhatsApp</strong>
-              </span>
-              <span className="game-contact-arrow" aria-hidden="true">â†—</span>
-            </a>
-          </div>
-        </section>
+    <a class="game-contact-link game-contact-link--instagram"
+       href="https://www.instagram.com/desh_3dlab/"
+       target="_blank"
+       rel="noopener noreferrer"
+       aria-label="Abrir Instagram DESH 3D LAB">
+
+      <span class="game-contact-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2"
+             stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="3" width="18" height="18" rx="5"/>
+          <circle cx="12" cy="12" r="4"/>
+          <circle cx="18" cy="6" r="1" fill="currentColor"/>
+        </svg>
+      </span>
+
+      <span class="game-contact-link-copy">
+        <small>INSTAGRAM</small>
+        <strong>@desh_3dlab</strong>
+      </span>
+
+      <span class="game-contact-arrow" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2"
+             stroke-linecap="round" stroke-linejoin="round">
+          <path d="M7 17 17 7"/>
+          <path d="M7 7h10v10"/>
+        </svg>
+      </span>
+    </a>
+
+    <a class="game-contact-link game-contact-link--phone"
+       href="tel:+5511927284470"
+       aria-label="Ligar para o comercial DESH 3D LAB">
+
+      <span class="game-contact-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2"
+             stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 16.92v3a2 2 0 0 1-2.18 2
+                   19.79 19.79 0 0 1-8.63-3.07
+                   19.5 19.5 0 0 1-6-6
+                   19.79 19.79 0 0 1-3.07-8.67
+                   A2 2 0 0 1 4.11 2h3
+                   a2 2 0 0 1 2 1.72
+                   c.12.96.36 1.9.7 2.79
+                   a2 2 0 0 1-.45 2.11L8.09 9.91
+                   a16 16 0 0 0 6 6l1.27-1.27
+                   a2 2 0 0 1 2.11-.45
+                   c.89.34 1.83.58 2.79.7
+                   A2 2 0 0 1 22 16.92z"/>
+        </svg>
+      </span>
+
+      <span class="game-contact-link-copy">
+        <small>COMERCIAL</small>
+        <strong>(11) 92728-4470</strong>
+      </span>
+
+      <span class="game-contact-arrow" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2"
+             stroke-linecap="round" stroke-linejoin="round">
+          <path d="M7 17 17 7"/>
+          <path d="M7 7h10v10"/>
+        </svg>
+      </span>
+    </a>
+
+    <a class="game-contact-link game-contact-link--whatsapp"
+       href="https://wa.me/5511927284470"
+       target="_blank"
+       rel="noopener noreferrer"
+       aria-label="Conversar pelo WhatsApp com DESH 3D LAB">
+
+      <span class="game-contact-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2"
+             stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 11.5a8.5 8.5 0 0 1-12.5 7.4L3 21l2.1-5.2A8.5 8.5 0 1 1 21 11.5z"/>
+          <text x="12" y="15" font-size="7"
+                text-anchor="middle" fill="currentColor"
+                stroke="none" font-weight="bold">WA</text>
+        </svg>
+      </span>
+
+      <span class="game-contact-link-copy">
+        <small>FALE COM A GENTE</small>
+        <strong>WhatsApp</strong>
+      </span>
+
+      <span class="game-contact-arrow" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2"
+             stroke-linecap="round" stroke-linejoin="round">
+          <path d="M7 17 17 7"/>
+          <path d="M7 7h10v10"/>
+        </svg>
+      </span>
+    </a>
+
+  </div>
+</section>
+
 
         <footer className="game-footer">
           <span>Â© {new Date().getFullYear()} GAMEKEY Â· DESH 3D LAB</span>

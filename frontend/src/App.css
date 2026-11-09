@@ -707,3 +707,21 @@
     height: 68px;
   }
 }
+
+.game-contact-icon {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+}
+
+.game-contact-icon svg {
+    display: block;
+    width: 26px;
+    height: 26px;
+}
+
+.game-contact-arrow svg {
+    display: block;
+    width: 18px;
+    height: 18px;
+}
