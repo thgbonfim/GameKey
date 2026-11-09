@@ -97,6 +97,168 @@
     EJS_gameName = nome;
     EJS_language = 'pt-BR';
 
+
+// ==========================================
+// CONTROLE PERSONALIZADO PLAYSTATION 1
+// Aplicado somente quando o core for PSX
+// ==========================================
+
+if (core === 'psx') {
+  EJS_VirtualGamepadSettings = [
+
+    // ANALOGICO ESQUERDO
+    {
+      type: "zone",
+      location: "left",
+      left: "50%",
+      top: "50%",
+      joystickInput: true,
+      color: "blue",
+      inputValues: [19, 18, 17, 16]
+    },
+
+    // ANALOGICO DIREITO
+    {
+      type: "zone",
+      location: "top",
+      left: "50%",
+      top: "50%",
+      joystickInput: true,
+      color: "blue",
+      inputValues: [23, 22, 21, 20]
+    },
+
+    // TRIANGULO
+    {
+      type: "button",
+      text: "△",
+      id: "ps-triangle",
+      location: "right",
+      left: 40,
+      top: 0,
+      bold: true,
+      fontSize: 25,
+      input_value: 9
+    },
+
+    // QUADRADO
+    {
+      type: "button",
+      text: "□",
+      id: "ps-square",
+      location: "right",
+      top: 40,
+      bold: true,
+      fontSize: 25,
+      input_value: 1
+    },
+
+    // CIRCULO
+    {
+      type: "button",
+      text: "○",
+      id: "ps-circle",
+      location: "right",
+      left: 80,
+      top: 40,
+      bold: true,
+      fontSize: 25,
+      input_value: 8
+    },
+
+    // X
+    {
+      type: "button",
+      text: "×",
+      id: "ps-cross",
+      location: "right",
+      left: 40,
+      top: 80,
+      bold: true,
+      fontSize: 25,
+      input_value: 0
+    },
+
+    // L1
+    {
+      type: "button",
+      text: "L1",
+      id: "ps-l1",
+      location: "top",
+      left: 65,
+      top: 0,
+      block: true,
+      fontSize: 16,
+      input_value: 10
+    },
+
+    // L2
+    {
+      type: "button",
+      text: "L2",
+      id: "ps-l2",
+      location: "top",
+      left: 0,
+      top: 0,
+      block: true,
+      fontSize: 16,
+      input_value: 12
+    },
+
+    // R1
+    {
+      type: "button",
+      text: "R1",
+      id: "ps-r1",
+      location: "top",
+      right: 65,
+      top: 0,
+      block: true,
+      fontSize: 16,
+      input_value: 11
+    },
+
+    // R2
+    {
+      type: "button",
+      text: "R2",
+      id: "ps-r2",
+      location: "top",
+      right: 0,
+      top: 0,
+      block: true,
+      fontSize: 16,
+      input_value: 13
+    },
+
+    // SELECT
+    {
+      type: "button",
+      text: "SELECT",
+      id: "ps-select",
+      location: "center",
+      left: -5,
+      fontSize: 13,
+      block: true,
+      input_value: 2
+    },
+
+    // START
+    {
+      type: "button",
+      text: "START",
+      id: "ps-start",
+      location: "center",
+      left: 65,
+      fontSize: 13,
+      block: true,
+      input_value: 3
+    }
+
+  ];
+}
+
+
     const userAgent = navigator.userAgent || '';
 
 const androidChromium =
