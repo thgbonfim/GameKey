@@ -103,26 +103,26 @@
 // Aplicado somente quando o core for PSX
 // ==========================================
 
+
 if (core === 'psx') {
   EJS_VirtualGamepadSettings = [
 
-    // ANALOGICO ESQUERDO
+    // DIRECIONAL DIGITAL ESQUERDO
     {
-      type: "zone",
+      type: "dpad",
       location: "left",
       left: "50%",
-      top: "50%",
-      joystickInput: true,
-      color: "blue",
-      inputValues: [19, 18, 17, 16]
+      right: "50%",
+      joystickInput: false,
+      inputValues: [4, 5, 6, 7]
     },
 
-    // ANALOGICO DIREITO
+    // ANALOGICO DIREITO - PROXIMO AOS BOTOES
     {
       type: "zone",
-      location: "top",
-      left: "50%",
-      top: "50%",
+      location: "right",
+      right: "15%",
+      top: "65%",
       joystickInput: true,
       color: "blue",
       inputValues: [23, 22, 21, 20]
@@ -135,7 +135,6 @@ if (core === 'psx') {
       id: "ps-triangle",
       location: "right",
       left: 40,
-      top: 0,
       bold: true,
       fontSize: 25,
       input_value: 9
@@ -159,7 +158,7 @@ if (core === 'psx') {
       text: "○",
       id: "ps-circle",
       location: "right",
-      left: 80,
+      left: 81,
       top: 40,
       bold: true,
       fontSize: 25,
@@ -179,54 +178,40 @@ if (core === 'psx') {
       input_value: 0
     },
 
-    // L1
+    // L1 L2 R1 R2
     {
       type: "button",
       text: "L1",
       id: "ps-l1",
       location: "top",
       left: 65,
-      top: 0,
-      block: true,
       fontSize: 16,
       input_value: 10
     },
-
-    // L2
     {
       type: "button",
       text: "L2",
       id: "ps-l2",
       location: "top",
       left: 0,
-      top: 0,
-      block: true,
       fontSize: 16,
       input_value: 12
     },
-
-    // R1
     {
       type: "button",
       text: "R1",
       id: "ps-r1",
       location: "top",
       right: 65,
-      top: 0,
-      block: true,
       fontSize: 16,
       input_value: 11
     },
-
-    // R2
     {
       type: "button",
       text: "R2",
       id: "ps-r2",
       location: "top",
       right: 0,
-      top: 0,
-      block: true,
       fontSize: 16,
       input_value: 13
     },
