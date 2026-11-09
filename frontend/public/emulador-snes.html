@@ -1,145 +1,189 @@
 
-if (core === 'psx') {
-  EJS_VirtualGamepadSettings = [
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GameKey - Emulador</title>
 
-    // ANALOGICO ESQUERDO - ACIMA DO L1
-    {
-      type: "zone",
-      location: "top",
-      left: "18%",
-      top: "50%",
-      joystickInput: true,
-      color: "blue",
-      inputValues: [19, 18, 17, 16]
-    },
-
-    // ANALOGICO DIREITO - ACIMA DO R1
-    {
-      type: "zone",
-      location: "top",
-      right: "18%",
-      top: "50%",
-      joystickInput: true,
-      color: "blue",
-      inputValues: [23, 22, 21, 20]
-    },
-
-    // TRIANGULO
-    {
-      type: "button",
-      text: "△",
-      id: "ps-triangle",
-      location: "right",
-      left: 40,
-      bold: true,
-      fontSize: 25,
-      input_value: 9
-    },
-
-    // QUADRADO
-    {
-      type: "button",
-      text: "□",
-      id: "ps-square",
-      location: "right",
-      top: 40,
-      bold: true,
-      fontSize: 25,
-      input_value: 1
-    },
-
-    // CIRCULO
-    {
-      type: "button",
-      text: "○",
-      id: "ps-circle",
-      location: "right",
-      left: 81,
-      top: 40,
-      bold: true,
-      fontSize: 25,
-      input_value: 8
-    },
-
-    // X
-    {
-      type: "button",
-      text: "×",
-      id: "ps-cross",
-      location: "right",
-      left: 40,
-      top: 80,
-      bold: true,
-      fontSize: 25,
-      input_value: 0
-    },
-
-    // L1
-    {
-      type: "button",
-      text: "L1",
-      id: "ps-l1",
-      location: "top",
-      left: 65,
-      fontSize: 16,
-      input_value: 10
-    },
-
-    // L2
-    {
-      type: "button",
-      text: "L2",
-      id: "ps-l2",
-      location: "top",
-      left: 0,
-      fontSize: 16,
-      input_value: 12
-    },
-
-    // R1
-    {
-      type: "button",
-      text: "R1",
-      id: "ps-r1",
-      location: "top",
-      right: 65,
-      fontSize: 16,
-      input_value: 11
-    },
-
-    // R2
-    {
-      type: "button",
-      text: "R2",
-      id: "ps-r2",
-      location: "top",
-      right: 0,
-      fontSize: 16,
-      input_value: 13
-    },
-
-    // SELECT
-    {
-      type: "button",
-      text: "SELECT",
-      id: "ps-select",
-      location: "center",
-      left: -5,
-      fontSize: 13,
-      block: true,
-      input_value: 2
-    },
-
-    // START
-    {
-      type: "button",
-      text: "START",
-      id: "ps-start",
-      location: "center",
-      left: 65,
-      fontSize: 13,
-      block: true,
-      input_value: 3
+  <style>
+    * {
+      box-sizing: border-box;
     }
-  ];
-}
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      background: #080b14;
+      overflow: hidden;
+    }
+
+    #game {
+      width: 100%;
+      height: 100%;
+    }
+
+    #aviso-iniciar {
+      display: none;
+      position: fixed;
+      top: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 999999;
+      width: calc(100% - 20px);
+      max-width: 420px;
+      padding: 10px 14px;
+      border-radius: 10px;
+      background: rgba(12, 18, 35, 0.95);
+      border: 1px solid #eab308;
+      color: white;
+      font: 14px/1.5 Arial, sans-serif;
+      text-align: center;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    #aviso-iniciar strong {
+      color: #facc15;
+    }
+
+    @media (max-width: 768px) {
+      #aviso-iniciar {
+        display: block;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="game"></div>
+
+  <div id="aviso-iniciar">
+    <strong>GAMEKEY:</strong><br>
+    Toque em <strong>INICIAR JOGO</strong> para começar.<br>
+    Jogo lento ou áudio picotando?<br>
+    Experimente utilizar o <strong>Firefox</strong>.
+  </div>
+
+  <script>
+    const parametros = new URLSearchParams(
+      window.location.search
+    );
+
+    const core = parametros.get('core');
+    const arquivo = parametros.get('game');
+    const bios = parametros.get('bios');
+    const nome = parametros.get('name') || 'GameKey';
+
+    const modoLegado = parametros.get('legacy') === '1';
+    const testarThreads = parametros.get('threads') === '1';
+
+    const isolamentoAtivo =
+      window.crossOriginIsolated === true;
+
+    const memoriaCompartilhada =
+      typeof SharedArrayBuffer !== 'undefined';
+
+    const threadsAtivas =
+      testarThreads &&
+      isolamentoAtivo &&
+      memoriaCompartilhada;
+
+    if (!core || !arquivo) {
+      document.body.innerHTML =
+        'Configuração do jogo não encontrada.';
+
+      throw new Error(
+        'Emulador ou arquivo não informado.'
+      );
+    }
+
+    // CONFIGURACAO ORIGINAL DO EMULATORJS
+
+    EJS_player = '#game';
+    EJS_core = core;
+    EJS_gameUrl = arquivo;
+    EJS_biosUrl = bios || '';
+
+    EJS_pathtodata =
+      'https://cdn.emulatorjs.org/stable/data/';
+
+    EJS_gameName = nome;
+    EJS_language = 'pt-BR';
+
+    // CONTROLES NATIVOS DO EMULATORJS
+    // Sem personalizacao para recuperar a inicializacao.
+
+    // CONFIGURACAO DE INICIALIZACAO
+
+    const userAgent = navigator.userAgent || '';
+
+    const androidChromium =
+      /Android/i.test(userAgent) &&
+      !/Firefox|Fennec/i.test(userAgent);
+
+    EJS_startOnLoaded = !androidChromium;
+
+    EJS_startButtonName = 'INICIAR JOGO';
+
+    // DESEMPENHO
+
+    EJS_threads = threadsAtivas;
+
+    EJS_forceLegacyCores = modoLegado;
+
+    // PRONTO PARA INICIAR
+
+    EJS_ready = function () {
+      console.log('GameKey: EmulatorJS pronto.');
+
+      console.log(
+        'Core:',
+        core
+      );
+
+      console.log(
+        'Jogo:',
+        nome
+      );
+
+      console.log(
+        'Isolamento:',
+        isolamentoAtivo
+      );
+
+      console.log(
+        'SharedArrayBuffer:',
+        memoriaCompartilhada
+      );
+
+      console.log(
+        'Threads ativadas:',
+        threadsAtivas
+      );
+    };
+
+    // AVISO DE INICIALIZACAO
+
+    window.setTimeout(function () {
+      const aviso =
+        document.getElementById('aviso-iniciar');
+
+      if (aviso) {
+        aviso.style.opacity = '0';
+
+        window.setTimeout(function () {
+          aviso.style.display = 'none';
+        }, 300);
+      }
+    }, 5000);
+
+  </script>
+
+  <script src="https://cdn.emulatorjs.org/stable/data/loader.js"></script>
+
+</body>
+</html>
