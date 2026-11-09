@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
@@ -69,6 +69,7 @@
 
     const core = parametros.get('core');
     const arquivo = parametros.get('game');
+    const bios = parametros.get('bios');
     const nome = parametros.get('name') || 'GameKey';
 
     const modoLegado = parametros.get('legacy') === '1';
@@ -90,6 +91,7 @@
     EJS_player = '#game';
     EJS_core = core;
     EJS_gameUrl = arquivo;
+    EJS_biosUrl = bios || '';
     EJS_pathtodata =
       'https://cdn.emulatorjs.org/stable/data/';
     EJS_gameName = nome;
@@ -132,32 +134,6 @@ EJS_startButtonName = 'INICIAR JOGO';
     }, 5000);
   </script>
 
-  <script>
-    // Teste: remover transparencia desnecessaria do canvas WebGL.
-    (function () {
-      const proto = HTMLCanvasElement.prototype;
-      const originalGetContext = proto.getContext;
-
-      proto.getContext = function (type, attributes) {
-        if (
-          type === 'webgl' ||
-          type === 'webgl2' ||
-          type === 'experimental-webgl'
-        ) {
-          attributes = Object.assign({}, attributes || {}, {
-            alpha: false,
-            premultipliedAlpha: false
-          });
-        }
-
-        return originalGetContext.call(this, type, attributes);
-      };
-    })();
-  </script>
   <script src="https://cdn.emulatorjs.org/stable/data/loader.js"></script>
 </body>
 </html>
-
-
-
-

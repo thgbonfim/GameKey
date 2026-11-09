@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import './App.css'
 
 // ==========================================
-// CONFIGURAÇÃO DA API GAMEKEY
+// CONFIGURAÃ‡ÃƒO DA API GAMEKEY
 // ==========================================
 
 const API_URL = (
@@ -12,7 +12,7 @@ const API_URL = (
 const API_KEY = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY
 
 // ==========================================
-// CATÁLOGO OFICIAL GAMEKEY - 29 JOGOS
+// CATÃLOGO OFICIAL GAMEKEY - 29 JOGOS
 // ==========================================
 
 const jogos = {
@@ -21,56 +21,56 @@ const jogos = {
     nome: 'Super Mario World',
     plataforma: 'Super Nintendo',
     categoria: 'Aventura',
-    simbolo: '🍄',
+    simbolo: 'ðŸ„',
     descricao: 'Explore o mundo de Mario.'
   },
   'GK-SNES-002': {
     nome: "Yoshi's Island",
     plataforma: 'Super Nintendo',
     categoria: 'Aventura',
-    simbolo: '🦖',
+    simbolo: 'ðŸ¦–',
     descricao: 'A aventura de Yoshi.'
   },
   'GK-SNES-003': {
     nome: 'Mario Kart',
     plataforma: 'Super Nintendo',
     categoria: 'Corrida',
-    simbolo: '🏎️',
+    simbolo: 'ðŸŽï¸',
     descricao: 'Dispute corridas emocionantes.'
   },
   'GK-SNES-004': {
     nome: 'Donkey Kong 1',
     plataforma: 'Super Nintendo',
     categoria: 'Aventura',
-    simbolo: '🦍',
+    simbolo: 'ðŸ¦',
     descricao: 'A aventura na selva.'
   },
   'GK-SNES-005': {
     nome: 'Donkey Kong 2',
     plataforma: 'Super Nintendo',
     categoria: 'Aventura',
-    simbolo: '🦍',
+    simbolo: 'ðŸ¦',
     descricao: 'Mais desafios na selva.'
   },
   'GK-SNES-006': {
     nome: 'Donkey Kong 3',
     plataforma: 'Super Nintendo',
     categoria: 'Aventura',
-    simbolo: '🦍',
+    simbolo: 'ðŸ¦',
     descricao: 'Uma nova aventura.'
   },
   'GK-SNES-007': {
     nome: 'Aladdin',
     plataforma: 'Super Nintendo',
     categoria: 'Aventura',
-    simbolo: '🧞',
+    simbolo: 'ðŸ§ž',
     descricao: 'Uma aventura pelo reino de Agrabah.'
   },
   'GK-SNES-008': {
-    nome: 'O Rei Leão',
+    nome: 'O Rei LeÃ£o',
     plataforma: 'Super Nintendo',
     categoria: 'Aventura',
-    simbolo: '🦁',
+    simbolo: 'ðŸ¦',
     descricao: 'A jornada de Simba.'
   },
 
@@ -78,57 +78,57 @@ const jogos = {
   'GK-MD-001': {
     nome: 'Comix Zone',
     plataforma: 'Mega Drive',
-    categoria: 'Ação',
-    simbolo: '💥',
-    descricao: 'Ação dentro dos quadrinhos.'
+    categoria: 'AÃ§Ã£o',
+    simbolo: 'ðŸ’¥',
+    descricao: 'AÃ§Ã£o dentro dos quadrinhos.'
   },
   'GK-MD-002': {
     nome: 'Streets of Rage 1',
     plataforma: 'Mega Drive',
     categoria: 'Luta',
-    simbolo: '🥊',
+    simbolo: 'ðŸ¥Š',
     descricao: 'Combate nas ruas.'
   },
   'GK-MD-003': {
     nome: 'Streets of Rage 2',
     plataforma: 'Mega Drive',
     categoria: 'Luta',
-    simbolo: '🥊',
-    descricao: 'A continuação da batalha.'
+    simbolo: 'ðŸ¥Š',
+    descricao: 'A continuaÃ§Ã£o da batalha.'
   },
   'GK-MD-004': {
     nome: 'Earthworm Jim 1',
     plataforma: 'Mega Drive',
-    categoria: 'Ação',
-    simbolo: '🪱',
+    categoria: 'AÃ§Ã£o',
+    simbolo: 'ðŸª±',
     descricao: 'Uma aventura maluca.'
   },
   'GK-MD-005': {
     nome: 'Earthworm Jim 2',
     plataforma: 'Mega Drive',
-    categoria: 'Ação',
-    simbolo: '🪱',
+    categoria: 'AÃ§Ã£o',
+    simbolo: 'ðŸª±',
     descricao: 'Mais aventuras malucas.'
   },
   'GK-MD-006': {
     nome: 'Sonic 1',
     plataforma: 'Mega Drive',
     categoria: 'Aventura',
-    simbolo: '🦔',
+    simbolo: 'ðŸ¦”',
     descricao: 'A primeira aventura de Sonic.'
   },
   'GK-MD-007': {
     nome: 'Sonic 2',
     plataforma: 'Mega Drive',
     categoria: 'Aventura',
-    simbolo: '🦔',
-    descricao: 'Sonic está de volta.'
+    simbolo: 'ðŸ¦”',
+    descricao: 'Sonic estÃ¡ de volta.'
   },
   'GK-MD-008': {
     nome: 'Sonic 3',
     plataforma: 'Mega Drive',
     categoria: 'Aventura',
-    simbolo: '🦔',
+    simbolo: 'ðŸ¦”',
     descricao: 'Uma nova aventura em alta velocidade.'
   },
 
@@ -137,63 +137,63 @@ const jogos = {
     nome: 'Resident Evil 1',
     plataforma: 'PlayStation 1',
     categoria: 'Terror',
-    simbolo: '🧟',
+    simbolo: 'ðŸ§Ÿ',
     descricao: 'Sobreviva ao terror.'
   },
   'GK-PS1-002': {
     nome: 'Resident Evil 2',
     plataforma: 'PlayStation 1',
     categoria: 'Terror',
-    simbolo: '🧟',
+    simbolo: 'ðŸ§Ÿ',
     descricao: 'O terror continua.'
   },
   'GK-PS1-003': {
     nome: 'Resident Evil 3',
     plataforma: 'PlayStation 1',
     categoria: 'Terror',
-    simbolo: '🧟',
+    simbolo: 'ðŸ§Ÿ',
     descricao: 'Enfrente novos perigos.'
   },
   'GK-PS1-004': {
     nome: 'Mega Man X2',
     plataforma: 'PlayStation 1',
-    categoria: 'Ação',
-    simbolo: '🤖',
+    categoria: 'AÃ§Ã£o',
+    simbolo: 'ðŸ¤–',
     descricao: 'Uma batalha futurista.'
   },
   'GK-PS1-005': {
     nome: 'Mega Man X3',
     plataforma: 'PlayStation 1',
-    categoria: 'Ação',
-    simbolo: '🤖',
+    categoria: 'AÃ§Ã£o',
+    simbolo: 'ðŸ¤–',
     descricao: 'Novos desafios para Mega Man.'
   },
   'GK-PS1-006': {
     nome: 'Mega Man X4',
     plataforma: 'PlayStation 1',
-    categoria: 'Ação',
-    simbolo: '🤖',
+    categoria: 'AÃ§Ã£o',
+    simbolo: 'ðŸ¤–',
     descricao: 'Uma nova batalha.'
   },
   'GK-PS1-007': {
     nome: 'Castlevania: Symphony of the Night',
     plataforma: 'PlayStation 1',
     categoria: 'Aventura',
-    simbolo: '🧛',
+    simbolo: 'ðŸ§›',
     descricao: 'Explore o castelo misterioso.'
   },
   'GK-PS1-008': {
     nome: 'Crash Bandicoot: Warped',
     plataforma: 'PlayStation 1',
     categoria: 'Aventura',
-    simbolo: '🦊',
-    descricao: 'Uma aventura através do tempo.'
+    simbolo: 'ðŸ¦Š',
+    descricao: 'Uma aventura atravÃ©s do tempo.'
   },
   'GK-PS1-009': {
     nome: 'Street Fighter Alpha 2',
     plataforma: 'PlayStation 1',
     categoria: 'Luta',
-    simbolo: '🥋',
+    simbolo: 'ðŸ¥‹',
     descricao: 'Entre no combate.'
   },
 
@@ -202,28 +202,28 @@ const jogos = {
     nome: 'Super Mario 64',
     plataforma: 'Nintendo 64',
     categoria: 'Aventura',
-    simbolo: '🍄',
+    simbolo: 'ðŸ„',
     descricao: 'Explore o castelo de Mario.'
   },
   'GK-N64-002': {
     nome: 'Mario Kart 64',
     plataforma: 'Nintendo 64',
     categoria: 'Corrida',
-    simbolo: '🏎️',
+    simbolo: 'ðŸŽï¸',
     descricao: 'Corridas com Mario e seus amigos.'
   },
   'GK-N64-003': {
     nome: 'The Legend of Zelda: Ocarina of Time',
     plataforma: 'Nintendo 64',
     categoria: 'Aventura',
-    simbolo: '🗡️',
+    simbolo: 'ðŸ—¡ï¸',
     descricao: 'Uma grande aventura em Hyrule.'
   },
   'GK-N64-004': {
     nome: 'Killer Instinct Gold',
     plataforma: 'Nintendo 64',
     categoria: 'Luta',
-    simbolo: '⚔️',
+    simbolo: 'âš”ï¸',
     descricao: 'Combates intensos.'
   }
 }
@@ -243,8 +243,18 @@ const WHATSAPP_URL = `https://wa.me/${TELEFONE.replace('+', '')}`
 function GameScreen({ jogo, codigo }) {
   const temJogoReal = Boolean(jogo.emulador && jogo.rom_url)
 
+  const parametrosEmulador = new URLSearchParams()
+
+  parametrosEmulador.set('core', jogo.emulador)
+  parametrosEmulador.set('game', jogo.rom_url)
+  parametrosEmulador.set('name', jogo.nome)
+
+  if (jogo.bios_url) {
+    parametrosEmulador.set('bios', jogo.bios_url)
+  }
+
   const urlEmulador = temJogoReal
-    ? `/emulador-snes.html?core=${encodeURIComponent(jogo.emulador)}&game=${encodeURIComponent(jogo.rom_url)}&name=${encodeURIComponent(jogo.nome)}`
+    ? `/emulador-snes.html?${parametrosEmulador.toString()}`
     : null
 
   return (
@@ -258,7 +268,7 @@ function GameScreen({ jogo, codigo }) {
   </a>
 
   <span className="game-connected">
-    ● CHAVEIRO CONECTADO
+    â— CHAVEIRO CONECTADO
   </span>
 </header>
 
@@ -285,7 +295,7 @@ function GameScreen({ jogo, codigo }) {
             <div className="game-player-toolbar">
               <span className="game-player-toolbar-label">
                 <span className="game-player-live-dot" />
-                ÁREA DO JOGO
+                ÃREA DO JOGO
               </span>
               <span className="game-player-toolbar-brand">GAMEKEY PLAYER</span>
             </div>
@@ -306,9 +316,9 @@ function GameScreen({ jogo, codigo }) {
               <span>GAMEKEY</span>
               <strong>{jogo.simbolo}</strong>
             </div>
-            <h2>Este jogo está chegando!</h2>
+            <h2>Este jogo estÃ¡ chegando!</h2>
             <p className="game-instruction">
-              Este jogo ainda não possui arquivo cadastrado. Em breve estará disponível para jogar!
+              Este jogo ainda nÃ£o possui arquivo cadastrado. Em breve estarÃ¡ disponÃ­vel para jogar!
             </p>
           </div>
         )}
@@ -328,12 +338,12 @@ function GameScreen({ jogo, codigo }) {
               rel="noopener noreferrer"
               aria-label="Abrir Instagram DESH 3D LAB"
             >
-              <span className="game-contact-icon" aria-hidden="true">◎</span>
+              <span className="game-contact-icon" aria-hidden="true">â—Ž</span>
               <span className="game-contact-link-copy">
                 <small>INSTAGRAM</small>
                 <strong>@desh_3dlab</strong>
               </span>
-              <span className="game-contact-arrow" aria-hidden="true">↗</span>
+              <span className="game-contact-arrow" aria-hidden="true">â†—</span>
             </a>
 
             <a
@@ -341,12 +351,12 @@ function GameScreen({ jogo, codigo }) {
               href={`tel:${TELEFONE}`}
               aria-label="Ligar para o comercial DESH 3D LAB"
             >
-              <span className="game-contact-icon" aria-hidden="true">☎</span>
+              <span className="game-contact-icon" aria-hidden="true">â˜Ž</span>
               <span className="game-contact-link-copy">
                 <small>COMERCIAL</small>
                 <strong>(11) 92728-4470</strong>
               </span>
-              <span className="game-contact-arrow" aria-hidden="true">↗</span>
+              <span className="game-contact-arrow" aria-hidden="true">â†—</span>
             </a>
 
             <a
@@ -356,19 +366,19 @@ function GameScreen({ jogo, codigo }) {
               rel="noopener noreferrer"
               aria-label="Conversar pelo WhatsApp com DESH 3D LAB"
             >
-              <span className="game-contact-icon" aria-hidden="true">◉</span>
+              <span className="game-contact-icon" aria-hidden="true">â—‰</span>
               <span className="game-contact-link-copy">
                 <small>FALE COM A GENTE</small>
                 <strong>WhatsApp</strong>
               </span>
-              <span className="game-contact-arrow" aria-hidden="true">↗</span>
+              <span className="game-contact-arrow" aria-hidden="true">â†—</span>
             </a>
           </div>
         </section>
 
         <footer className="game-footer">
-          <span>© {new Date().getFullYear()} GAMEKEY · DESH 3D LAB</span>
-          <a href="/">Voltar ao início <span aria-hidden="true">↑</span></a>
+          <span>Â© {new Date().getFullYear()} GAMEKEY Â· DESH 3D LAB</span>
+          <a href="/">Voltar ao inÃ­cio <span aria-hidden="true">â†‘</span></a>
         </footer>
       </section>
     </main>
@@ -376,19 +386,19 @@ function GameScreen({ jogo, codigo }) {
 }
 
 // ==========================================
-// CHAVEIRO NÃO ENCONTRADO
+// CHAVEIRO NÃƒO ENCONTRADO
 // ==========================================
 
 function NotFound() {
   return (
     <main className="game-page game-page--state">
       <section className="game-state-card">
-        <span className="game-state-label">GAMEKEY · DESH 3D LAB</span>
-        <h1>Chaveiro não encontrado</h1>
+        <span className="game-state-label">GAMEKEY Â· DESH 3D LAB</span>
+        <h1>Chaveiro nÃ£o encontrado</h1>
         <p>
-          Não encontramos um jogo associado a este endereço. Verifique o código do seu chaveiro.
+          NÃ£o encontramos um jogo associado a este endereÃ§o. Verifique o cÃ³digo do seu chaveiro.
         </p>
-        <a href="/" className="game-state-button">Voltar ao início</a>
+        <a href="/" className="game-state-button">Voltar ao inÃ­cio</a>
       </section>
     </main>
   )
@@ -402,7 +412,7 @@ function LoadingScreen() {
   return (
     <main className="game-page game-page--state">
       <section className="game-state-card">
-        <span className="game-state-label">GAMEKEY · DESH 3D LAB</span>
+        <span className="game-state-label">GAMEKEY Â· DESH 3D LAB</span>
         <div className="game-loading-spinner" aria-hidden="true" />
         <h1>Conectando seu jogo...</h1>
         <p>Estamos verificando seu chaveiro. Aguarde um instante.</p>
@@ -412,27 +422,27 @@ function LoadingScreen() {
 }
 
 // ==========================================
-// ERRO DE CONEXÃO
+// ERRO DE CONEXÃƒO
 // ==========================================
 
 function ApiError() {
   return (
     <main className="game-page game-page--state">
       <section className="game-state-card">
-        <span className="game-state-label">GAMEKEY · DESH 3D LAB</span>
-        <h1>Não foi possível conectar</h1>
+        <span className="game-state-label">GAMEKEY Â· DESH 3D LAB</span>
+        <h1>NÃ£o foi possÃ­vel conectar</h1>
         <p>
-          O servidor GameKey não respondeu. Tente novamente em alguns instantes.
+          O servidor GameKey nÃ£o respondeu. Tente novamente em alguns instantes.
         </p>
-        <a href="/" className="game-state-button">Voltar ao início</a>
+        <a href="/" className="game-state-button">Voltar ao inÃ­cio</a>
       </section>
     </main>
   )
 }
 
 // ==========================================
-// PÁGINA INICIAL
-// Mantida sem alterações nesta entrega.
+// PÃGINA INICIAL
+// Mantida sem alteraÃ§Ãµes nesta entrega.
 // ==========================================
 
 function Home() {
@@ -476,13 +486,13 @@ function Home() {
         </a>
 
         <nav className="navigation">
-          <a href="#inicio">Início</a>
+          <a href="#inicio">InÃ­cio</a>
           <a href="#jogos">Jogos</a>
           <a href="#como-funciona">Como funciona</a>
         </nav>
 
         <a href="#como-funciona" className="access-button">
-          <span>◉</span> Tenho um chaveiro
+          <span>â—‰</span> Tenho um chaveiro
         </a>
       </header>
 
@@ -491,7 +501,7 @@ function Home() {
           <div className="hero-content">
             <div className="eyebrow">
               <span className="status-dot" />
-              SUA DIVERSÃO COMEÇA AQUI
+              SUA DIVERSÃƒO COMEÃ‡A AQUI
             </div>
 
             <h1>
@@ -503,14 +513,14 @@ function Home() {
             </h1>
 
             <p className="hero-description">
-              Seu jogo está no seu chaveiro.
+              Seu jogo estÃ¡ no seu chaveiro.
               Aproxime do celular e comece a jogar,
               sem precisar instalar aplicativos.
             </p>
 
             <div className="hero-actions">
               <a href="#jogos" className="primary-button">
-                Conhecer os jogos →
+                Conhecer os jogos â†’
               </a>
 
               <a href="#como-funciona" className="secondary-button">
@@ -524,7 +534,7 @@ function Home() {
             <div className="orbit orbit-one" />
             <div className="orbit orbit-two" />
 
-            <div className="floating-card card-back">🎮</div>
+            <div className="floating-card card-back">ðŸŽ®</div>
 
             <div className="floating-card card-front">
               <span className="key-symbol">G</span>
@@ -559,7 +569,7 @@ function Home() {
           <div className="section-heading">
             <div>
               <span className="section-label">UNIVERSO GAMEKEY</span>
-              <h2>Conheça nossos jogos</h2>
+              <h2>ConheÃ§a nossos jogos</h2>
               <p>
                 29 aventuras para descobrir.
                 Cada chaveiro abre seu jogo diretamente.
@@ -605,19 +615,19 @@ function Home() {
           <div className="steps-grid">
             <article className="step-card">
               <span className="step-number">01</span>
-              <span className="step-icon">🔑</span>
+              <span className="step-icon">ðŸ”‘</span>
               <h3>Tenha seu GameKey</h3>
               <p>Adquira um chaveiro com tecnologia NFC.</p>
             </article>
             <article className="step-card">
               <span className="step-number">02</span>
-              <span className="step-icon">📱</span>
+              <span className="step-icon">ðŸ“±</span>
               <h3>Aproxime do celular</h3>
-              <p>O celular abre o endereço exclusivo do seu jogo.</p>
+              <p>O celular abre o endereÃ§o exclusivo do seu jogo.</p>
             </article>
             <article className="step-card">
               <span className="step-number">03</span>
-              <span className="step-icon">🕹️</span>
+              <span className="step-icon">ðŸ•¹ï¸</span>
               <h3>Comece a jogar</h3>
               <p>O jogo abre diretamente no navegador do celular.</p>
             </article>
@@ -627,10 +637,10 @@ function Home() {
         <section className="final-cta">
           <div>
             <span className="section-label">GAMEKEY</span>
-            <h2>Seu próximo jogo está a um toque.</h2>
-            <p>Um chaveiro. Uma experiência. Diversão na palma da mão.</p>
+            <h2>Seu prÃ³ximo jogo estÃ¡ a um toque.</h2>
+            <p>Um chaveiro. Uma experiÃªncia. DiversÃ£o na palma da mÃ£o.</p>
           </div>
-          <a href="#jogos" className="primary-button">Conhecer jogos →</a>
+          <a href="#jogos" className="primary-button">Conhecer jogos â†’</a>
         </section>
       </main>
 
@@ -639,8 +649,8 @@ function Home() {
           <span className="brand-icon">G</span>
           GAME<span className="brand-highlight">KEY</span>
         </a>
-        <p>Uma nova forma de jogar. © 2026 GameKey.</p>
-        <a href="#inicio">Voltar ao topo ↑</a>
+        <p>Uma nova forma de jogar. Â© 2026 GameKey.</p>
+        <a href="#inicio">Voltar ao topo â†‘</a>
       </footer>
     </>
   )
@@ -695,7 +705,7 @@ function App() {
 
         const jogoValidado = {
           ...dados.jogo,
-          simbolo: jogoCatalogo?.simbolo || '🎮'
+          simbolo: jogoCatalogo?.simbolo || 'ðŸŽ®'
         }
 
         setResultado({
