@@ -107,7 +107,7 @@
     }
 
     // ==========================================
-    // CONFIGURACAO ORIGINAL EMULATORJS
+    // EMULATORJS
     // ==========================================
 
     EJS_player = '#game';
@@ -122,59 +122,20 @@
     EJS_language = 'pt-BR';
 
     // ==========================================
-    // CONTROLE PLAYSTATION DUALSHOCK
-    // EXCLUSIVO PARA PS1
+    // CONTROLE PLAYSTATION 1
+    // SOMENTE DOIS ANALOGICOS
+    // SEM DIRECIONAL DIGITAL
     // ==========================================
 
     if (core === 'psx') {
 
+      const centroBotoes =
+        Math.round(window.innerWidth / 2);
+
       EJS_VirtualGamepadSettings = [
 
         // --------------------------------------
-        // ANALOGICO ESQUERDO
-        // ACIMA DOS BOTOES L1 E L2
-        // --------------------------------------
-
-        {
-          type: "zone",
-          location: "top",
-          left: "18%",
-          top: "8%",
-          joystickInput: true,
-          color: "blue",
-          inputValues: [19, 18, 17, 16]
-        },
-
-        // --------------------------------------
-        // ANALOGICO DIREITO
-        // ACIMA DOS BOTOES R1 E R2
-        // --------------------------------------
-
-        {
-          type: "zone",
-          location: "top",
-          right: "18%",
-          top: "8%",
-          joystickInput: true,
-          color: "blue",
-          inputValues: [23, 22, 21, 20]
-        },
-
-        // --------------------------------------
-        // DIRECIONAL DIGITAL
-        // --------------------------------------
-
-        {
-          type: "dpad",
-          location: "left",
-          left: "50%",
-          right: "50%",
-          joystickInput: false,
-          inputValues: [4, 5, 6, 7]
-        },
-
-        // --------------------------------------
-        // L2
+        // L2 - SUPERIOR ESQUERDO
         // --------------------------------------
 
         {
@@ -182,15 +143,15 @@
           text: "L2",
           id: "ps-l2",
           location: "top",
-          left: 0,
-          top: 145,
+          left: 10,
+          top: 0,
           fontSize: 16,
           bold: true,
           input_value: 12
         },
 
         // --------------------------------------
-        // L1
+        // L1 - SUPERIOR ESQUERDO
         // --------------------------------------
 
         {
@@ -198,15 +159,15 @@
           text: "L1",
           id: "ps-l1",
           location: "top",
-          left: 65,
-          top: 145,
+          left: 70,
+          top: 0,
           fontSize: 16,
           bold: true,
           input_value: 10
         },
 
         // --------------------------------------
-        // R1
+        // R1 - SUPERIOR DIREITO
         // --------------------------------------
 
         {
@@ -214,15 +175,15 @@
           text: "R1",
           id: "ps-r1",
           location: "top",
-          right: 65,
-          top: 145,
+          right: 70,
+          top: 0,
           fontSize: 16,
           bold: true,
           input_value: 11
         },
 
         // --------------------------------------
-        // R2
+        // R2 - SUPERIOR DIREITO
         // --------------------------------------
 
         {
@@ -230,11 +191,41 @@
           text: "R2",
           id: "ps-r2",
           location: "top",
-          right: 0,
-          top: 145,
+          right: 10,
+          top: 0,
           fontSize: 16,
           bold: true,
           input_value: 13
+        },
+
+        // --------------------------------------
+        // ANALOGICO ESQUERDO
+        // ABAIXO DE L1 E L2
+        // --------------------------------------
+
+        {
+          type: "zone",
+          location: "left",
+          left: "50%",
+          top: "50%",
+          joystickInput: true,
+          color: "blue",
+          inputValues: [19, 18, 17, 16]
+        },
+
+        // --------------------------------------
+        // ANALOGICO DIREITO
+        // ABAIXO DE R1 E R2
+        // --------------------------------------
+
+        {
+          type: "zone",
+          location: "right",
+          left: "50%",
+          top: "50%",
+          joystickInput: true,
+          color: "blue",
+          inputValues: [23, 22, 21, 20]
         },
 
         // --------------------------------------
@@ -245,9 +236,9 @@
           type: "button",
           text: "△",
           id: "ps-triangle",
-          location: "right",
-          left: 40,
-          top: 0,
+          location: "top",
+          left: centroBotoes - 25,
+          top: 55,
           bold: true,
           fontSize: 25,
           input_value: 9
@@ -261,9 +252,9 @@
           type: "button",
           text: "□",
           id: "ps-square",
-          location: "right",
-          left: 0,
-          top: 40,
+          location: "top",
+          left: centroBotoes - 80,
+          top: 105,
           bold: true,
           fontSize: 25,
           input_value: 1
@@ -277,9 +268,9 @@
           type: "button",
           text: "○",
           id: "ps-circle",
-          location: "right",
-          left: 80,
-          top: 40,
+          location: "top",
+          left: centroBotoes + 30,
+          top: 105,
           bold: true,
           fontSize: 25,
           input_value: 8
@@ -293,9 +284,9 @@
           type: "button",
           text: "×",
           id: "ps-cross",
-          location: "right",
-          left: 40,
-          top: 80,
+          location: "top",
+          left: centroBotoes - 25,
+          top: 155,
           bold: true,
           fontSize: 25,
           input_value: 0
@@ -334,7 +325,11 @@
       ];
 
       console.log(
-        'GameKey: Controle DualShock PS1 configurado.'
+        'GameKey: DualShock PS1 configurado.'
+      );
+
+      console.log(
+        'Dois analogicos ativos. D-pad removido.'
       );
     }
 
