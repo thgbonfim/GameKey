@@ -1,8 +1,9 @@
+
 import { useState, useEffect } from 'react'
 import './App.css'
 
 // ==========================================
-// CONFIGURAÃ‡ÃƒO DA API GAMEKEY
+// CONFIGURAÇÃO DA API GAMEKEY
 // ==========================================
 
 const API_URL = (
@@ -12,7 +13,7 @@ const API_URL = (
 const API_KEY = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY
 
 // ==========================================
-// CATÃLOGO OFICIAL GAMEKEY - 29 JOGOS
+// CATÁLOGO OFICIAL GAMEKEY
 // ==========================================
 
 const jogos = {
@@ -21,56 +22,56 @@ const jogos = {
     nome: 'Super Mario World',
     plataforma: 'Super Nintendo',
     categoria: 'Aventura',
-    simbolo: 'ðŸ„',
+    simbolo: '🍄',
     descricao: 'Explore o mundo de Mario.'
   },
   'GK-SNES-002': {
     nome: "Yoshi's Island",
     plataforma: 'Super Nintendo',
     categoria: 'Aventura',
-    simbolo: 'ðŸ¦–',
+    simbolo: '🦖',
     descricao: 'A aventura de Yoshi.'
   },
   'GK-SNES-003': {
     nome: 'Mario Kart',
     plataforma: 'Super Nintendo',
     categoria: 'Corrida',
-    simbolo: 'ðŸŽï¸',
+    simbolo: '🏎️',
     descricao: 'Dispute corridas emocionantes.'
   },
   'GK-SNES-004': {
     nome: 'Donkey Kong 1',
     plataforma: 'Super Nintendo',
     categoria: 'Aventura',
-    simbolo: 'ðŸ¦',
+    simbolo: '🦍',
     descricao: 'A aventura na selva.'
   },
   'GK-SNES-005': {
     nome: 'Donkey Kong 2',
     plataforma: 'Super Nintendo',
     categoria: 'Aventura',
-    simbolo: 'ðŸ¦',
+    simbolo: '🦍',
     descricao: 'Mais desafios na selva.'
   },
   'GK-SNES-006': {
     nome: 'Donkey Kong 3',
     plataforma: 'Super Nintendo',
     categoria: 'Aventura',
-    simbolo: 'ðŸ¦',
+    simbolo: '🦍',
     descricao: 'Uma nova aventura.'
   },
   'GK-SNES-007': {
     nome: 'Aladdin',
     plataforma: 'Super Nintendo',
     categoria: 'Aventura',
-    simbolo: 'ðŸ§ž',
+    simbolo: '🧞',
     descricao: 'Uma aventura pelo reino de Agrabah.'
   },
   'GK-SNES-008': {
-    nome: 'O Rei LeÃ£o',
+    nome: 'O Rei Leão',
     plataforma: 'Super Nintendo',
     categoria: 'Aventura',
-    simbolo: 'ðŸ¦',
+    simbolo: '🦁',
     descricao: 'A jornada de Simba.'
   },
 
@@ -78,57 +79,57 @@ const jogos = {
   'GK-MD-001': {
     nome: 'Comix Zone',
     plataforma: 'Mega Drive',
-    categoria: 'AÃ§Ã£o',
-    simbolo: 'ðŸ’¥',
-    descricao: 'AÃ§Ã£o dentro dos quadrinhos.'
+    categoria: 'Ação',
+    simbolo: '💥',
+    descricao: 'Ação dentro dos quadrinhos.'
   },
   'GK-MD-002': {
     nome: 'Streets of Rage 1',
     plataforma: 'Mega Drive',
     categoria: 'Luta',
-    simbolo: 'ðŸ¥Š',
+    simbolo: '🥊',
     descricao: 'Combate nas ruas.'
   },
   'GK-MD-003': {
     nome: 'Streets of Rage 2',
     plataforma: 'Mega Drive',
     categoria: 'Luta',
-    simbolo: 'ðŸ¥Š',
-    descricao: 'A continuaÃ§Ã£o da batalha.'
+    simbolo: '🥊',
+    descricao: 'A continuação da batalha.'
   },
   'GK-MD-004': {
     nome: 'Earthworm Jim 1',
     plataforma: 'Mega Drive',
-    categoria: 'AÃ§Ã£o',
-    simbolo: 'ðŸª±',
+    categoria: 'Ação',
+    simbolo: '🪱',
     descricao: 'Uma aventura maluca.'
   },
   'GK-MD-005': {
     nome: 'Earthworm Jim 2',
     plataforma: 'Mega Drive',
-    categoria: 'AÃ§Ã£o',
-    simbolo: 'ðŸª±',
+    categoria: 'Ação',
+    simbolo: '🪱',
     descricao: 'Mais aventuras malucas.'
   },
   'GK-MD-006': {
     nome: 'Sonic 1',
     plataforma: 'Mega Drive',
     categoria: 'Aventura',
-    simbolo: 'ðŸ¦”',
+    simbolo: '🦔',
     descricao: 'A primeira aventura de Sonic.'
   },
   'GK-MD-007': {
     nome: 'Sonic 2',
     plataforma: 'Mega Drive',
     categoria: 'Aventura',
-    simbolo: 'ðŸ¦”',
-    descricao: 'Sonic estÃ¡ de volta.'
+    simbolo: '🦔',
+    descricao: 'Sonic está de volta.'
   },
   'GK-MD-008': {
     nome: 'Sonic 3',
     plataforma: 'Mega Drive',
     categoria: 'Aventura',
-    simbolo: 'ðŸ¦”',
+    simbolo: '🦔',
     descricao: 'Uma nova aventura em alta velocidade.'
   },
 
@@ -137,63 +138,63 @@ const jogos = {
     nome: 'Resident Evil 1',
     plataforma: 'PlayStation 1',
     categoria: 'Terror',
-    simbolo: 'ðŸ§Ÿ',
+    simbolo: '🧟',
     descricao: 'Sobreviva ao terror.'
   },
   'GK-PS1-002': {
     nome: 'Resident Evil 2',
     plataforma: 'PlayStation 1',
     categoria: 'Terror',
-    simbolo: 'ðŸ§Ÿ',
+    simbolo: '🧟',
     descricao: 'O terror continua.'
   },
   'GK-PS1-003': {
     nome: 'Resident Evil 3',
     plataforma: 'PlayStation 1',
     categoria: 'Terror',
-    simbolo: 'ðŸ§Ÿ',
+    simbolo: '🧟',
     descricao: 'Enfrente novos perigos.'
   },
   'GK-PS1-004': {
     nome: 'Mega Man X2',
     plataforma: 'PlayStation 1',
-    categoria: 'AÃ§Ã£o',
-    simbolo: 'ðŸ¤–',
+    categoria: 'Ação',
+    simbolo: '🤖',
     descricao: 'Uma batalha futurista.'
   },
   'GK-PS1-005': {
     nome: 'Mega Man X3',
     plataforma: 'PlayStation 1',
-    categoria: 'AÃ§Ã£o',
-    simbolo: 'ðŸ¤–',
+    categoria: 'Ação',
+    simbolo: '🤖',
     descricao: 'Novos desafios para Mega Man.'
   },
   'GK-PS1-006': {
     nome: 'Mega Man X4',
     plataforma: 'PlayStation 1',
-    categoria: 'AÃ§Ã£o',
-    simbolo: 'ðŸ¤–',
+    categoria: 'Ação',
+    simbolo: '🤖',
     descricao: 'Uma nova batalha.'
   },
   'GK-PS1-007': {
     nome: 'Castlevania: Symphony of the Night',
     plataforma: 'PlayStation 1',
     categoria: 'Aventura',
-    simbolo: 'ðŸ§›',
+    simbolo: '🧛',
     descricao: 'Explore o castelo misterioso.'
   },
   'GK-PS1-008': {
     nome: 'Crash Bandicoot: Warped',
     plataforma: 'PlayStation 1',
     categoria: 'Aventura',
-    simbolo: 'ðŸ¦Š',
-    descricao: 'Uma aventura atravÃ©s do tempo.'
+    simbolo: '🦊',
+    descricao: 'Uma aventura através do tempo.'
   },
   'GK-PS1-009': {
     nome: 'Street Fighter Alpha 2',
     plataforma: 'PlayStation 1',
     categoria: 'Luta',
-    simbolo: 'ðŸ¥‹',
+    simbolo: '🥋',
     descricao: 'Entre no combate.'
   },
 
@@ -202,28 +203,28 @@ const jogos = {
     nome: 'Super Mario 64',
     plataforma: 'Nintendo 64',
     categoria: 'Aventura',
-    simbolo: 'ðŸ„',
+    simbolo: '🍄',
     descricao: 'Explore o castelo de Mario.'
   },
   'GK-N64-002': {
     nome: 'Mario Kart 64',
     plataforma: 'Nintendo 64',
     categoria: 'Corrida',
-    simbolo: 'ðŸŽï¸',
+    simbolo: '🏎️',
     descricao: 'Corridas com Mario e seus amigos.'
   },
   'GK-N64-003': {
     nome: 'The Legend of Zelda: Ocarina of Time',
     plataforma: 'Nintendo 64',
     categoria: 'Aventura',
-    simbolo: 'ðŸ—¡ï¸',
+    simbolo: '🗡️',
     descricao: 'Uma grande aventura em Hyrule.'
   },
   'GK-N64-004': {
     nome: 'Killer Instinct Gold',
     plataforma: 'Nintendo 64',
     categoria: 'Luta',
-    simbolo: 'âš”ï¸',
+    simbolo: '⚔️',
     descricao: 'Combates intensos.'
   }
 }
@@ -259,18 +260,18 @@ function GameScreen({ jogo, codigo }) {
 
   return (
     <main className="game-page game-page--player">
-     <header className="game-topbar">
-  <a href="/" className="desh-brand">
-    <img
-      src="/desh-3d-lab-logo.jpeg"
-      alt="DESH 3D LAB"
-    />
-  </a>
+      <header className="game-topbar">
+        <a href="/" className="desh-brand">
+          <img
+            src="/desh-3d-lab-logo.jpeg"
+            alt="DESH 3D LAB"
+          />
+        </a>
 
-  <span className="game-connected">
-    â— CHAVEIRO CONECTADO
-  </span>
-</header>
+        <span className="game-connected">
+          ● CHAVEIRO CONECTADO
+        </span>
+      </header>
 
       <section className="game-area">
         <div className="game-heading">
@@ -280,6 +281,7 @@ function GameScreen({ jogo, codigo }) {
               <span className="game-breadcrumb-separator">/</span>
               <span>{jogo.categoria}</span>
             </div>
+
             <h1>{jogo.nome}</h1>
             <p className="game-description">{jogo.descricao}</p>
           </div>
@@ -291,13 +293,19 @@ function GameScreen({ jogo, codigo }) {
         </div>
 
         {temJogoReal ? (
-          <section className="game-player-shell" aria-label={`Emulador de ${jogo.nome}`}>
+          <section
+            className="game-player-shell"
+            aria-label={`Emulador de ${jogo.nome}`}
+          >
             <div className="game-player-toolbar">
               <span className="game-player-toolbar-label">
                 <span className="game-player-live-dot" />
-                ÃREA DO JOGO
+                ÁREA DO JOGO
               </span>
-              <span className="game-player-toolbar-brand">GAMEKEY PLAYER</span>
+
+              <span className="game-player-toolbar-brand">
+                GAMEKEY PLAYER
+              </span>
             </div>
 
             <div className="game-frame-wrap">
@@ -316,132 +324,109 @@ function GameScreen({ jogo, codigo }) {
               <span>GAMEKEY</span>
               <strong>{jogo.simbolo}</strong>
             </div>
-            <h2>Este jogo estÃ¡ chegando!</h2>
+
+            <h2>Este jogo está chegando!</h2>
+
             <p className="game-instruction">
-              Este jogo ainda nÃ£o possui arquivo cadastrado. Em breve estarÃ¡ disponÃ­vel para jogar!
+              Este jogo ainda não possui arquivo cadastrado.
+              Em breve estará disponível para jogar!
             </p>
           </div>
         )}
 
-       
-<section class="game-contact-panel" aria-label="Contato DESH 3D LAB">
+        <section
+          className="game-contact-panel"
+          aria-label="Contato DESH 3D LAB"
+        >
+          <div className="game-contact-intro">
+            <span className="game-contact-eyebrow">DESH 3D LAB</span>
+            <h2>Precisa de ajuda ou quer conhecer mais?</h2>
+            <p>Fale com nosso comercial e acompanhe as novidades.</p>
+          </div>
 
-  <div class="game-contact-intro">
-    <span class="game-contact-eyebrow">DESH 3D LAB</span>
-    <h2>Precisa de ajuda ou quer conhecer mais?</h2>
-    <p>Fale com nosso comercial e acompanhe as novidades.</p>
-  </div>
+          <div className="game-contact-actions">
+            <a
+              className="game-contact-link game-contact-link--instagram"
+              href={INSTAGRAM_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Abrir Instagram DESH 3D LAB"
+            >
+              <span className="game-contact-icon" aria-hidden="true">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <rect x="3" y="3" width="18" height="18" rx="5" />
+                  <circle cx="12" cy="12" r="4" />
+                  <circle cx="18" cy="6" r="1" fill="currentColor" />
+                </svg>
+              </span>
 
-  <div class="game-contact-actions">
+              <span className="game-contact-link-copy">
+                <small>INSTAGRAM</small>
+                <strong>@desh_3dlab</strong>
+              </span>
 
-    <a class="game-contact-link game-contact-link--instagram"
-       href="https://www.instagram.com/desh_3dlab/"
-       target="_blank"
-       rel="noopener noreferrer"
-       aria-label="Abrir Instagram DESH 3D LAB">
+              <span className="game-contact-arrow" aria-hidden="true">
+                ↗
+              </span>
+            </a>
 
-      <span class="game-contact-icon" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none"
-             stroke="currentColor" stroke-width="2"
-             stroke-linecap="round" stroke-linejoin="round">
-          <rect x="3" y="3" width="18" height="18" rx="5"/>
-          <circle cx="12" cy="12" r="4"/>
-          <circle cx="18" cy="6" r="1" fill="currentColor"/>
-        </svg>
-      </span>
+            <a
+              className="game-contact-link game-contact-link--phone"
+              href={`tel:${TELEFONE}`}
+              aria-label="Ligar para o comercial DESH 3D LAB"
+            >
+              <span className="game-contact-icon" aria-hidden="true">
+                ☎
+              </span>
 
-      <span class="game-contact-link-copy">
-        <small>INSTAGRAM</small>
-        <strong>@desh_3dlab</strong>
-      </span>
+              <span className="game-contact-link-copy">
+                <small>COMERCIAL</small>
+                <strong>(11) 92728-4470</strong>
+              </span>
 
-      <span class="game-contact-arrow" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none"
-             stroke="currentColor" stroke-width="2"
-             stroke-linecap="round" stroke-linejoin="round">
-          <path d="M7 17 17 7"/>
-          <path d="M7 7h10v10"/>
-        </svg>
-      </span>
-    </a>
+              <span className="game-contact-arrow" aria-hidden="true">
+                ↗
+              </span>
+            </a>
 
-    <a class="game-contact-link game-contact-link--phone"
-       href="tel:+5511927284470"
-       aria-label="Ligar para o comercial DESH 3D LAB">
+            <a
+              className="game-contact-link game-contact-link--whatsapp"
+              href={WHATSAPP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Conversar pelo WhatsApp com DESH 3D LAB"
+            >
+              <span className="game-contact-icon" aria-hidden="true">
+                WA
+              </span>
 
-      <span class="game-contact-icon" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none"
-             stroke="currentColor" stroke-width="2"
-             stroke-linecap="round" stroke-linejoin="round">
-          <path d="M22 16.92v3a2 2 0 0 1-2.18 2
-                   19.79 19.79 0 0 1-8.63-3.07
-                   19.5 19.5 0 0 1-6-6
-                   19.79 19.79 0 0 1-3.07-8.67
-                   A2 2 0 0 1 4.11 2h3
-                   a2 2 0 0 1 2 1.72
-                   c.12.96.36 1.9.7 2.79
-                   a2 2 0 0 1-.45 2.11L8.09 9.91
-                   a16 16 0 0 0 6 6l1.27-1.27
-                   a2 2 0 0 1 2.11-.45
-                   c.89.34 1.83.58 2.79.7
-                   A2 2 0 0 1 22 16.92z"/>
-        </svg>
-      </span>
+              <span className="game-contact-link-copy">
+                <small>FALE COM A GENTE</small>
+                <strong>WhatsApp</strong>
+              </span>
 
-      <span class="game-contact-link-copy">
-        <small>COMERCIAL</small>
-        <strong>(11) 92728-4470</strong>
-      </span>
-
-      <span class="game-contact-arrow" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none"
-             stroke="currentColor" stroke-width="2"
-             stroke-linecap="round" stroke-linejoin="round">
-          <path d="M7 17 17 7"/>
-          <path d="M7 7h10v10"/>
-        </svg>
-      </span>
-    </a>
-
-    <a class="game-contact-link game-contact-link--whatsapp"
-       href="https://wa.me/5511927284470"
-       target="_blank"
-       rel="noopener noreferrer"
-       aria-label="Conversar pelo WhatsApp com DESH 3D LAB">
-
-      <span class="game-contact-icon" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none"
-             stroke="currentColor" stroke-width="2"
-             stroke-linecap="round" stroke-linejoin="round">
-          <path d="M21 11.5a8.5 8.5 0 0 1-12.5 7.4L3 21l2.1-5.2A8.5 8.5 0 1 1 21 11.5z"/>
-          <text x="12" y="15" font-size="7"
-                text-anchor="middle" fill="currentColor"
-                stroke="none" font-weight="bold">WA</text>
-        </svg>
-      </span>
-
-      <span class="game-contact-link-copy">
-        <small>FALE COM A GENTE</small>
-        <strong>WhatsApp</strong>
-      </span>
-
-      <span class="game-contact-arrow" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none"
-             stroke="currentColor" stroke-width="2"
-             stroke-linecap="round" stroke-linejoin="round">
-          <path d="M7 17 17 7"/>
-          <path d="M7 7h10v10"/>
-        </svg>
-      </span>
-    </a>
-
-  </div>
-</section>
-
+              <span className="game-contact-arrow" aria-hidden="true">
+                ↗
+              </span>
+            </a>
+          </div>
+        </section>
 
         <footer className="game-footer">
-          <span>Â© {new Date().getFullYear()} GAMEKEY Â· DESH 3D LAB</span>
-          <a href="/">Voltar ao inÃ­cio <span aria-hidden="true">â†‘</span></a>
+          <span>
+            © {new Date().getFullYear()} GAMEKEY · DESH 3D LAB
+          </span>
+
+          <a href="/">
+            Voltar ao início <span aria-hidden="true">↑</span>
+          </a>
         </footer>
       </section>
     </main>
@@ -449,19 +434,25 @@ function GameScreen({ jogo, codigo }) {
 }
 
 // ==========================================
-// CHAVEIRO NÃƒO ENCONTRADO
+// CHAVEIRO NÃO ENCONTRADO
 // ==========================================
 
 function NotFound() {
   return (
     <main className="game-page game-page--state">
       <section className="game-state-card">
-        <span className="game-state-label">GAMEKEY Â· DESH 3D LAB</span>
-        <h1>Chaveiro nÃ£o encontrado</h1>
+        <span className="game-state-label">GAMEKEY · DESH 3D LAB</span>
+
+        <h1>Chaveiro não encontrado</h1>
+
         <p>
-          NÃ£o encontramos um jogo associado a este endereÃ§o. Verifique o cÃ³digo do seu chaveiro.
+          Não encontramos um jogo associado a este endereço.
+          Verifique o código do seu chaveiro.
         </p>
-        <a href="/" className="game-state-button">Voltar ao inÃ­cio</a>
+
+        <a href="/" className="game-state-button">
+          Voltar ao início
+        </a>
       </section>
     </main>
   )
@@ -475,9 +466,12 @@ function LoadingScreen() {
   return (
     <main className="game-page game-page--state">
       <section className="game-state-card">
-        <span className="game-state-label">GAMEKEY Â· DESH 3D LAB</span>
+        <span className="game-state-label">GAMEKEY · DESH 3D LAB</span>
+
         <div className="game-loading-spinner" aria-hidden="true" />
+
         <h1>Conectando seu jogo...</h1>
+
         <p>Estamos verificando seu chaveiro. Aguarde um instante.</p>
       </section>
     </main>
@@ -485,27 +479,32 @@ function LoadingScreen() {
 }
 
 // ==========================================
-// ERRO DE CONEXÃƒO
+// ERRO DE CONEXÃO
 // ==========================================
 
 function ApiError() {
   return (
     <main className="game-page game-page--state">
       <section className="game-state-card">
-        <span className="game-state-label">GAMEKEY Â· DESH 3D LAB</span>
-        <h1>NÃ£o foi possÃ­vel conectar</h1>
+        <span className="game-state-label">GAMEKEY · DESH 3D LAB</span>
+
+        <h1>Não foi possível conectar</h1>
+
         <p>
-          O servidor GameKey nÃ£o respondeu. Tente novamente em alguns instantes.
+          O servidor GameKey não respondeu.
+          Tente novamente em alguns instantes.
         </p>
-        <a href="/" className="game-state-button">Voltar ao inÃ­cio</a>
+
+        <a href="/" className="game-state-button">
+          Voltar ao início
+        </a>
       </section>
     </main>
   )
 }
 
 // ==========================================
-// PÃGINA INICIAL
-// Mantida sem alteraÃ§Ãµes nesta entrega.
+// PÁGINA INICIAL
 // ==========================================
 
 function Home() {
@@ -549,13 +548,13 @@ function Home() {
         </a>
 
         <nav className="navigation">
-          <a href="#inicio">InÃ­cio</a>
+          <a href="#inicio">Início</a>
           <a href="#jogos">Jogos</a>
           <a href="#como-funciona">Como funciona</a>
         </nav>
 
         <a href="#como-funciona" className="access-button">
-          <span>â—‰</span> Tenho um chaveiro
+          <span>◉</span> Tenho um chaveiro
         </a>
       </header>
 
@@ -564,7 +563,7 @@ function Home() {
           <div className="hero-content">
             <div className="eyebrow">
               <span className="status-dot" />
-              SUA DIVERSÃƒO COMEÃ‡A AQUI
+              SUA DIVERSÃO COMEÇA AQUI
             </div>
 
             <h1>
@@ -576,14 +575,14 @@ function Home() {
             </h1>
 
             <p className="hero-description">
-              Seu jogo estÃ¡ no seu chaveiro.
+              Seu jogo está no seu chaveiro.
               Aproxime do celular e comece a jogar,
               sem precisar instalar aplicativos.
             </p>
 
             <div className="hero-actions">
               <a href="#jogos" className="primary-button">
-                Conhecer os jogos â†’
+                Conhecer os jogos →
               </a>
 
               <a href="#como-funciona" className="secondary-button">
@@ -597,7 +596,7 @@ function Home() {
             <div className="orbit orbit-one" />
             <div className="orbit orbit-two" />
 
-            <div className="floating-card card-back">ðŸŽ®</div>
+            <div className="floating-card card-back">🎮</div>
 
             <div className="floating-card card-front">
               <span className="key-symbol">G</span>
@@ -618,10 +617,12 @@ function Home() {
             <strong>01</strong>
             <span>ESCOLHA SEU CHAVEIRO</span>
           </div>
+
           <div>
             <strong>02</strong>
             <span>APROXIME DO CELULAR</span>
           </div>
+
           <div>
             <strong>03</strong>
             <span>COMECE A JOGAR</span>
@@ -632,7 +633,8 @@ function Home() {
           <div className="section-heading">
             <div>
               <span className="section-label">UNIVERSO GAMEKEY</span>
-              <h2>ConheÃ§a nossos jogos</h2>
+              <h2>Conheça nossos jogos</h2>
+
               <p>
                 29 aventuras para descobrir.
                 Cada chaveiro abre seu jogo diretamente.
@@ -651,17 +653,29 @@ function Home() {
                 {plataforma.jogos.map(([codigo, jogo], index) => (
                   <article className="game-card" key={codigo}>
                     <div className={`game-cover ${plataforma.codigo.toLowerCase()}`}>
-                      <span className="game-category">{jogo.categoria.toUpperCase()}</span>
-                      <span className="game-illustration">{jogo.simbolo}</span>
-                      <span className="game-number">{String(index + 1).padStart(2, '0')}</span>
+                      <span className="game-category">
+                        {jogo.categoria.toUpperCase()}
+                      </span>
+
+                      <span className="game-illustration">
+                        {jogo.simbolo}
+                      </span>
+
+                      <span className="game-number">
+                        {String(index + 1).padStart(2, '0')}
+                      </span>
                     </div>
 
                     <div className="game-info">
                       <div className="game-title-row">
                         <h3>{jogo.nome}</h3>
-                        <span className="game-status available">Cadastrado</span>
+                        <span className="game-status available">
+                          Cadastrado
+                        </span>
                       </div>
+
                       <p>{jogo.descricao}</p>
+
                       <span className="section-label">{codigo}</span>
                     </div>
                   </article>
@@ -678,19 +692,21 @@ function Home() {
           <div className="steps-grid">
             <article className="step-card">
               <span className="step-number">01</span>
-              <span className="step-icon">ðŸ”‘</span>
+              <span className="step-icon">🔑</span>
               <h3>Tenha seu GameKey</h3>
               <p>Adquira um chaveiro com tecnologia NFC.</p>
             </article>
+
             <article className="step-card">
               <span className="step-number">02</span>
-              <span className="step-icon">ðŸ“±</span>
+              <span className="step-icon">📱</span>
               <h3>Aproxime do celular</h3>
-              <p>O celular abre o endereÃ§o exclusivo do seu jogo.</p>
+              <p>O celular abre o endereço exclusivo do seu jogo.</p>
             </article>
+
             <article className="step-card">
               <span className="step-number">03</span>
-              <span className="step-icon">ðŸ•¹ï¸</span>
+              <span className="step-icon">🕹️</span>
               <h3>Comece a jogar</h3>
               <p>O jogo abre diretamente no navegador do celular.</p>
             </article>
@@ -700,10 +716,16 @@ function Home() {
         <section className="final-cta">
           <div>
             <span className="section-label">GAMEKEY</span>
-            <h2>Seu prÃ³ximo jogo estÃ¡ a um toque.</h2>
-            <p>Um chaveiro. Uma experiÃªncia. DiversÃ£o na palma da mÃ£o.</p>
+            <h2>Seu próximo jogo está a um toque.</h2>
+            <p>
+              Um chaveiro. Uma experiência.
+              Diversão na palma da mão.
+            </p>
           </div>
-          <a href="#jogos" className="primary-button">Conhecer jogos â†’</a>
+
+          <a href="#jogos" className="primary-button">
+            Conhecer jogos →
+          </a>
         </section>
       </main>
 
@@ -712,8 +734,10 @@ function Home() {
           <span className="brand-icon">G</span>
           GAME<span className="brand-highlight">KEY</span>
         </a>
-        <p>Uma nova forma de jogar. Â© 2026 GameKey.</p>
-        <a href="#inicio">Voltar ao topo â†‘</a>
+
+        <p>Uma nova forma de jogar. © 2026 GameKey.</p>
+
+        <a href="#inicio">Voltar ao topo ↑</a>
       </footer>
     </>
   )
@@ -766,9 +790,24 @@ function App() {
         const codigoJogo = dados.jogo.codigo
         const jogoCatalogo = jogos[codigoJogo]
 
+        // ======================================
+        // INTEGRAÇÃO DE PLAYLIST M3U
+        // ======================================
+
+        const romUrl = typeof dados.jogo.rom_url === 'string'
+          ? dados.jogo.rom_url
+          : ''
+
+        // Se for M3U, direciona para a rota especial.
+        // Se não for M3U, conserva a URL original.
+        const romUrlFinal = /\.m3u(?:$|\?)/i.test(romUrl)
+          ? `${API_URL}/api/playlists/${encodeURIComponent(codigo)}`
+          : romUrl
+
         const jogoValidado = {
           ...dados.jogo,
-          simbolo: jogoCatalogo?.simbolo || 'ðŸŽ®'
+          rom_url: romUrlFinal,
+          simbolo: jogoCatalogo?.simbolo || '🎮'
         }
 
         setResultado({
