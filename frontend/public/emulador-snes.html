@@ -383,7 +383,73 @@
 
   </script>
 
-  <script src="https://cdn.emulatorjs.org/stable/data/loader.js"></script>
+  <script>
+  (async function () {
+    const loaderUrl =
+      'https://cdn.emulatorjs.org/stable/data/loader.js';
+
+    try {
+      const gameUrl = window.EJS_gameUrl;
+      const core = window.EJS_core;
+
+      if (
+        core === 'psx' &&
+        typeof gameUrl === 'string' &&
+        /\.m3u(?:$|[?#])/i.test(gameUrl)
+      ) {
+        console.log('GameKey: carregando playlist M3U...');
+
+        const resposta = await fetch(gameUrl, {
+          cache: 'no-store'
+        });
+
+        if (!resposta.ok) {
+          throw new Error('Falha na playlist: HTTP ' + resposta.status);
+        }
+
+        const texto = await resposta.text();
+
+        const discos = texto
+          .split(/\r?\n/)
+          .map(linha => linha.trim())
+          .filter(linha =>
+            linha.length > 0 && !linha.startsWith('#')
+          );
+
+        if (discos.length < 2) {
+          throw new Error('Playlist não contém os dois discos.');
+        }
+
+        if (!discos.every(url => /^https?:\/\//i.test(url))) {
+          throw new Error('Endereço de disco inválido na playlist.');
+        }
+
+        window.EJS_gameUrl = discos;
+
+        console.log('GameKey: discos encontrados:', discos.length);
+      }
+
+      const loader = document.createElement('script');
+      loader.src = loaderUrl;
+
+      loader.onerror = function () {
+        console.error('GameKey: falha ao carregar EmulatorJS.');
+      };
+
+      document.body.appendChild(loader);
+
+    } catch (erro) {
+      console.error('GameKey: erro ao preparar o jogo:', erro);
+
+      const area = document.getElementById('game');
+
+      if (area) {
+        area.innerText =
+          'Não foi possível preparar os discos do jogo. Verifique a conexão e tente novamente.';
+      }
+    }
+  })();
+</script>
 
 </body>
 </html>
