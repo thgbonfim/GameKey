@@ -801,7 +801,7 @@ function App() {
         // Se for M3U, direciona para a rota especial.
         // Se não for M3U, conserva a URL original.
         const romUrlFinal = /\.m3u(?:$|\?)/i.test(romUrl)
-          ? `${API_URL}/api/playlists/${encodeURIComponent(codigo)}`
+          ? `${API_URL}/api/playlists/${encodeURIComponent(codigo)}.m3u`
           : romUrl
 
         const jogoValidado = {
