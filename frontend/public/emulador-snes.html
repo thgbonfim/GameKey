@@ -122,27 +122,31 @@
     EJS_language = 'pt-BR';
 
     // ==========================================
-    // CONTROLE PLAYSTATION 1
-    // SOMENTE DOIS ANALOGICOS
-    // SEM DIRECIONAL DIGITAL
+    // CONTROLE PERSONALIZADO PLAYSTATION 1
+    // DIRECIONAL DIGITAL EM CRUZ
+    // SEM ANALOGICOS
     // ==========================================
 
     if (core === 'psx') {
 
-      const centroBotoes =
-        Math.round(window.innerWidth / 2);
-
-EJS_defaultOptions = {
-  'pcsx_rearmed_pad1type': 'dualshock',
-  'pcsx_rearmed_analog_combo': 'l1+r1+select'
-};
-
-
       EJS_VirtualGamepadSettings = [
 
-        // --------------------------------------
-        // L2 - SUPERIOR ESQUERDO
-        // --------------------------------------
+        // ======================================
+        // DIRECIONAL DIGITAL ESQUERDO
+        // ======================================
+
+        {
+          type: "dpad",
+          location: "left",
+          left: "50%",
+          right: "50%",
+          joystickInput: false,
+          inputValues: [4, 5, 6, 7]
+        },
+
+        // ======================================
+        // L2
+        // ======================================
 
         {
           type: "button",
@@ -156,9 +160,9 @@ EJS_defaultOptions = {
           input_value: 12
         },
 
-        // --------------------------------------
-        // L1 - SUPERIOR ESQUERDO
-        // --------------------------------------
+        // ======================================
+        // L1
+        // ======================================
 
         {
           type: "button",
@@ -172,9 +176,9 @@ EJS_defaultOptions = {
           input_value: 10
         },
 
-        // --------------------------------------
-        // R1 - SUPERIOR DIREITO
-        // --------------------------------------
+        // ======================================
+        // R1
+        // ======================================
 
         {
           type: "button",
@@ -188,9 +192,9 @@ EJS_defaultOptions = {
           input_value: 11
         },
 
-        // --------------------------------------
-        // R2 - SUPERIOR DIREITO
-        // --------------------------------------
+        // ======================================
+        // R2
+        // ======================================
 
         {
           type: "button",
@@ -204,42 +208,10 @@ EJS_defaultOptions = {
           input_value: 13
         },
 
-        // --------------------------------------
-        // ANALOGICO ESQUERDO
-        // ABAIXO DE L1 E L2
-        // --------------------------------------
-
-        {
-          type: "zone",
-          location: "left",
-          left: "50%",
-          top: "50%",
-          joystickInput: true,
-          color: "blue",
-          inputValues: [19, 18, 17, 16]
-        },
-
-        // --------------------------------------
-        // ANALOGICO DIREITO
-        // ABAIXO DE R1 E R2
-        // --------------------------------------
-
-        {
-          type: "zone",
-          location: "right",
-          left: "0%",
-          top: "90%",
-          joystickInput: true,
-          color: "blue",
-          inputValues: [23, 22, 21, 20]
-        },
-
-      
         // ======================================
-        // BOTOES DE ACAO - LATERAL DIREITA
-        // ======================================
-
         // TRIANGULO
+        // ======================================
+
         {
           type: "button",
           text: "△",
@@ -252,7 +224,10 @@ EJS_defaultOptions = {
           input_value: 9
         },
 
+        // ======================================
         // QUADRADO
+        // ======================================
+
         {
           type: "button",
           text: "□",
@@ -265,7 +240,10 @@ EJS_defaultOptions = {
           input_value: 1
         },
 
+        // ======================================
         // CIRCULO
+        // ======================================
+
         {
           type: "button",
           text: "○",
@@ -278,7 +256,10 @@ EJS_defaultOptions = {
           input_value: 8
         },
 
+        // ======================================
         // X
+        // ======================================
+
         {
           type: "button",
           text: "×",
@@ -291,9 +272,9 @@ EJS_defaultOptions = {
           input_value: 0
         },
 
-        // --------------------------------------
+        // ======================================
         // SELECT
-        // --------------------------------------
+        // ======================================
 
         {
           type: "button",
@@ -306,9 +287,9 @@ EJS_defaultOptions = {
           input_value: 2
         },
 
-        // --------------------------------------
+        // ======================================
         // START
-        // --------------------------------------
+        // ======================================
 
         {
           type: "button",
@@ -324,11 +305,7 @@ EJS_defaultOptions = {
       ];
 
       console.log(
-        'GameKey: DualShock PS1 configurado.'
-      );
-
-      console.log(
-        'Dois analogicos ativos. D-pad removido.'
+        'GameKey: Controle digital PS1 configurado.'
       );
     }
 
